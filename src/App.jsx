@@ -1,26 +1,34 @@
-import React from 'react'
-import {useState} from 'react'
-import Toggle from './Toggle'
-function App() {
-const [name,setName]= useState("jeeban")
-const[count, setCount]=useState(0)
-const namechange=()=>{
-  setName("jeebanjyoti")
-};
-
+import React from "react"
+import { useState } from "react"
+import Hobbies from "./Hobbies"
+import Child from "./Child"
+import User from "./User"
+import Event from "./Event"
+const App=()=>{
+  const [hobbi,setHobbi]=useState("cricket")
+  let hobby="cricket"
+  const obj1={
+    "name":"jeeban",
+    "age":21
+  }
+  const name="jeeban"
+  let array=[1,2,3,4,5]
   return(
     <div>
-      <h1>Learning about state</h1>
-      <p>name: {name}</p>
-      <button onClick={namechange}>Change Name</button>
-      <p>count: {count}</p>
-      <button onClick={()=>setCount(count+1)}>Increment</button>
-      <button onClick={()=>setCount(count-1)}>Decrement</button>
-      <button onClick={()=>setCount(0)}>Reset</button>
-
-      <Toggle/>
+      <h1>Welcome to My React APP</h1>
+      <Hobbies hobby={hobby} obj={obj1} num={array.join(", ")} />
+    
+      <Child/> {/* //default props */}
+       {/* //Jsx props */}
+     <User> 
+      <div> 
+        <h1>My name is JSX </h1>  
+      </div>
+     </User>
+     <Event />
+     
     </div>
+    // Onclick Event Props
   )
 }
-
 export default App
