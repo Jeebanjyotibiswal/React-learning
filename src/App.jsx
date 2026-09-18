@@ -1,53 +1,55 @@
+
 import React from "react";
 import { useState } from "react";
 
 function App() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-  const handleSubmit = (e) => {
-    (e.preventDefault(),
-      alert(`Name:${name},Email:${email},Password:${password}`));
-  };
- const handleClear = () => {
-    setName("");
-    setEmail("");
-    setPassword("");
-  };
+  const [selected, setSelected] = useState({
+    html: false,
+    css: false,
+    js: false
+  });
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          placeholder="Enter your Name"
-        />
+      <input
+        type="checkbox"
+        checked={selected.html}
+        onChange={(e) =>
+          setSelected({ ...selected, html: e.target.checked })
+        }
+      />
+      <label>HTML</label>
 
-        
-        <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="Enter your Email"
-        />
-        
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="Enter your Password"
-        />
-        
-        <button type="submit" onSubmit={handleSubmit}>submit</button>
-        
-        <button type="reset" onClick={handleClear}>clear</button>
-        <p>LIVE demo : {name}, {email}, {password}</p>
-      </form>
+      <input
+        type="checkbox"
+        checked={selected.css}
+        onChange={(e) =>
+          setSelected({ ...selected, css: e.target.checked })
+        }
+      />
+      <label>CSS</label>
+
+      <input
+        type="checkbox"
+        checked={selected.js}
+        onChange={(e) =>
+          setSelected({ ...selected, js: e.target.checked })
+        }
+      />
+      <label>JS</label>
+      <button onClick={() => setSelected({ html: false, css: false, js: false })}>
+        Reset
+      </button>
+      <h3>selected:</h3>
+      <ul>
+        {selected.html && <li>HTML</li>}
+        {selected.css && <li>CSS</li>}
+        {selected.js && <li>JS</li>}
+      </ul>
+
     </div>
   );
 }
 
 export default App;
+
