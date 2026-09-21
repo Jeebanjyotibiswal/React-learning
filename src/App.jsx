@@ -1,55 +1,48 @@
-
-import React from "react";
-import { useState } from "react";
-
-function App() {
-  const [selected, setSelected] = useState({
-    html: false,
-    css: false,
-    js: false
-  });
-
-  return (
+import React from 'react';
+import {useState} from 'react';
+function App(){
+  const [gender,setGender] = useState('male');
+  const [country,setCountry]=useState("india")
+  return(
     <div>
-      <input
-        type="checkbox"
-        checked={selected.html}
-        onChange={(e) =>
-          setSelected({ ...selected, html: e.target.checked })
-        }
-      />
-      <label>HTML</label>
+      <h1> Example of radio button and Drop Down</h1>
+      <h2>Radio Button of gender</h2>
+      <h3>select gender</h3>
+      <label >
+        <input type="radio"
+        name='gender' value="male" checked={gender==="male"}
+        onChange={(e)=>setGender(e.target.value)}
+        />
+        Male
+      </label>
+         <label >
+        <input type="radio"
+        name='gender' value="female" checked={gender==="female"}
+        onChange={(e)=>setGender(e.target.value)}
+        />
+        female
+      </label>
+         <label >
+        <input type="radio"
+        name='gender' value="other" checked={gender==="other"}
+        onChange={(e)=>setGender(e.target.value)}
+        />
+       
+        Other
+      </label>
+       <p>Gender :{gender}</p>
 
-      <input
-        type="checkbox"
-        checked={selected.css}
-        onChange={(e) =>
-          setSelected({ ...selected, css: e.target.checked })
-        }
-      />
-      <label>CSS</label>
-
-      <input
-        type="checkbox"
-        checked={selected.js}
-        onChange={(e) =>
-          setSelected({ ...selected, js: e.target.checked })
-        }
-      />
-      <label>JS</label>
-      <button onClick={() => setSelected({ html: false, css: false, js: false })}>
-        Reset
-      </button>
-      <h3>selected:</h3>
-      <ul>
-        {selected.html && <li>HTML</li>}
-        {selected.css && <li>CSS</li>}
-        {selected.js && <li>JS</li>}
-      </ul>
-
+       <h1>Drop Down for countries</h1>
+       <select value={country} onChange={(e)=>setCountry(e.target.value)}>
+        <option value="india">India</option>
+        <option value="Pakistan">Pakistan</option>
+        <option value="UK">UK</option>
+        <option value="USA">USA</option>
+        <option value="Brazil">Brazil</option>
+        
+       </select>
+       <p>Selected Country :{country}</p>
     </div>
-  );
+  )
 }
-
 export default App;
-
