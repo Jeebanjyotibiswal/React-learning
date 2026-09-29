@@ -1,19 +1,41 @@
-import React, { useTransition } from 'react'
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+
 
 function App() {
-  const [pending, startTransition] = useTransition()
-  const handleClick=()=>{
-    startTransition(async () => {
-      await new Promise((resolve) => setTimeout(resolve, 2000))
-    })
-  }
+  // step 1:- state define
+  const [user, setUser] = useState([]);
+  // step 2 : data fetch function
+  const fetchData = async () => {
+    const url = "https://jsonplaceholder.typicode.com/users";
+    try {
+      const response = await axios.get(url);
+      // step 3 :- set state by response data
+      setUser(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  // step4 :- useEffect apply
+  useEffect(() => {
+    (fetchData(), []);
+  });
+  // step 5  make the UI
   return (
     <div>
-      <h2>Use Transition Example</h2>
-      <button disabled={pending} onClick={handleClick}>Click me !!</button>
+      <div>
+        <h1>Users</h1>
 
+        {user.map((i) => (
+          <div key={i.id}>
+            <h3>{i.name}</h3>
+            <p>{i.email}</p>
+            <p>-----------------------------------</p>
+          </div>
+        ))}
+      </div>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
